@@ -52,6 +52,9 @@ LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/stack/common \
         frameworks/native/include/media/hardware \
         frameworks/native/include/media/openmax \
+        frameworks/native/libs/nativewindow/include \
+        frameworks/native/libs/arect/include \
+        frameworks/native/libs/nativebase/include \
         hardware/qcom/media-caf/msm8952/libstagefrighthw \
         system/media/camera/include \
         $(LOCAL_PATH)/../mm-image-codec/qexif \
@@ -95,9 +98,10 @@ ifeq ($(TARGET_TS_MAKEUP),true)
 LOCAL_SHARED_LIBRARIES += libts_face_beautify_hal libts_detected_face_hal
 endif
 
-LOCAL_CLANG := false
+LOCAL_CLANG := true
 
 LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE := camera.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_TAGS := optional
 

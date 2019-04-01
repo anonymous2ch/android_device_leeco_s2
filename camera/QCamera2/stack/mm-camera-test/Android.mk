@@ -82,12 +82,12 @@ endif
 LOCAL_CFLAGS += -Wall -Wextra -Werror
 
 LOCAL_SHARED_LIBRARIES:= \
-         libcutils libdl libmmcamera_interface
+         libcutils libdl libmmcamera_interface liblog
 
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_32_BIT_ONLY := $(BOARD_QTI_CAMERA_32BIT_ONLY)
-LOCAL_CLANG := false
+LOCAL_CLANG := true
 
 LOCAL_MODULE:= mm-qcamera-app
 
@@ -173,12 +173,12 @@ endif
 LOCAL_CFLAGS += -Wall -Wextra -Werror
 
 LOCAL_SHARED_LIBRARIES:= \
-         libcutils libdl libmmcamera_interface
+         libcutils libdl libmmcamera_interface liblog
 
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_32_BIT_ONLY := $(BOARD_QTI_CAMERA_32BIT_ONLY)
 
-LOCAL_CLANG := false
+LOCAL_CLANG := true
 LOCAL_MODULE:= libmm-qcamera
 include $(BUILD_SHARED_LIBRARY)

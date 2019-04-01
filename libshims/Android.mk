@@ -19,9 +19,11 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := media/libstagefright/foundation/MediaBuffer.c
+LOCAL_SRC_FILES := media/libstagefright/foundation/MediaBuffer.cpp
 
-LOCAL_SHARED_LIBRARIES := libstagefright_foundation
+LOCAL_SHARED_LIBRARIES := libstagefright_foundation libui libgui
+
+LOCAL_CFLAGS := -Wno-unused-private-field
 
 LOCAL_MODULE := libshims_ims
 LOCAL_MODULE_TAGS := optional
@@ -42,5 +44,16 @@ LOCAL_MODULE := libshims_camera
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_32_BIT_ONLY := true
+
+include $(BUILD_SHARED_LIBRARY)
+
+
+# libshims_rild_socket
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := rild_socket/rild_socket.c
+
+LOCAL_MODULE := libshims_rild_socket
+LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
