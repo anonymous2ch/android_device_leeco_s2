@@ -6,11 +6,18 @@
 /boot           emmc        /dev/block/platform/soc.0/7824900.sdhci/by-name/boot                                   flags=display="Boot";backup=1;wipeingui
 /cache          ext4        /dev/block/platform/soc.0/7824900.sdhci/by-name/cache                                  flags=display="Cache";backup=0;wipeingui
 /data           ext4        /dev/block/platform/soc.0/7824900.sdhci/by-name/userdata                               flags=encryptable=footer
+/cache          f2fs        /dev/block/platform/soc.0/7824900.sdhci/by-name/cache                                  flags=display="Cache";backup=0;wipeingui
+/data           f2fs        /dev/block/platform/soc.0/7824900.sdhci/by-name/userdata                               flags=encryptable=footer
 /recovery       emmc        /dev/block/platform/soc.0/7824900.sdhci/by-name/recovery                               flags=display="Recovery";backup=1
 /system_image   emmc        /dev/block/platform/soc.0/7824900.sdhci/by-name/system                                 flags=backup=1
 /system         ext4        /dev/block/platform/soc.0/7824900.sdhci/by-name/system                                 flags=display="System";backup=1;wipeingui
 /persist        ext4        /dev/block/platform/soc.0/7824900.sdhci/by-name/persist                                flags=display="Persist";backup=1
 /dsp            ext4        /dev/block/platform/soc.0/7824900.sdhci/by-name/dsp                                    flags=display="Dsp";backup=1
+/system         f2fs        /dev/block/platform/soc.0/7824900.sdhci/by-name/system                                 flags=display="System";backup=1;wipeingui
+/persist        f2fs        /dev/block/platform/soc.0/7824900.sdhci/by-name/persist                                flags=display="Persist";backup=1
+/dsp            f2fs        /dev/block/platform/soc.0/7824900.sdhci/by-name/dsp                                    flags=display="Dsp";backup=1
+
+
 /misc           emmc        /dev/block/platform/soc.0/7824900.sdhci/by-name/misc                                   flags=display="Misc"
 /firmware       vfat        /dev/block/platform/soc.0/7824900.sdhci/by-name/modem                                  flags=display="Firmware";backup=1
 /frp            emmc        /dev/block/platform/soc.0/7824900.sdhci/by-name/config                                 flags=display="Frp";backup=1

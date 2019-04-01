@@ -271,5 +271,6 @@ include device/qcom/sepolicy/sepolicy.mk
 TARGET_OTA_ASSERT_DEVICE := s2,le_s2,le_s2_ww
 # inherit from the proprietary version
 
-
+BOARD_USES_SNAPDRAGONCAMERA_VERSION := 2
+    
 -include vendor/leeco/s2/BoardConfigVendor.mk
