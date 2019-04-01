@@ -28,21 +28,16 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cstdlib>
+#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <android-base/logging.h>
-#include <android-base/properties.h>
 
-#include "property_service.h"
 #include "vendor_init.h"
-
-#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
-#include <sys/_system_properties.h>
+#include "property_service.h"
+#include "log.h"
+#include "util.h"
 
 #define DEVINFO_FILE "/dev/block/bootdevice/by-name/devinfo"
-
-using android::init::property_set;
 
 static int read_file2(const char *fname, char *data, int max_size)
 {
@@ -53,6 +48,7 @@ static int read_file2(const char *fname, char *data, int max_size)
 
     fd = open(fname, O_RDONLY);
     if (fd < 0) {
+        ERROR("failed to open '%s'\n", fname);
         return 0;
     }
 
@@ -130,6 +126,8 @@ void vendor_load_properties() {
     int isX520 = 0, isX522 = 0, isX526 = 0, isX527 = 0;
 
     // Default props
+    property_set("ro.thermanager.config", "/system/etc/thermanager.xml");
+
     if (read_file2(DEVINFO_FILE, device, sizeof(device)))
     {
         if (!strncmp(device, "s2_open", 7))
@@ -164,6 +162,7 @@ void vendor_load_properties() {
     {
         // This is X526
         property_set("ro.product.model", "X526");
+        property_set("ro.thermanager.config", "/system/etc/thermanager_X526.xml");
     }
     else if (isX527)
     {

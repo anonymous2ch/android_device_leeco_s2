@@ -1,1 +1,1 @@
-allow mediacodec mpctl_socket:dir search;
+allow mediacodec mpctl_socket:dir { search };
