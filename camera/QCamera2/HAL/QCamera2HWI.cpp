@@ -9130,7 +9130,9 @@ void *QCamera2HardwareInterface::deferredWorkRoutine(void *obj)
                     break;
                 case CMD_DEF_PARAM_ALLOC:
                     {
+                        pthread_mutex_lock(&pme->m_parm_lock);
                         pme->mParameters.allocate();
+                        pthread_mutex_unlock(&pme->m_parm_lock);
                     }
                     break;
                 case CMD_DEF_PARAM_INIT:
@@ -9152,7 +9154,6 @@ void *QCamera2HardwareInterface::deferredWorkRoutine(void *obj)
                         pme->mParameters.init(cap,
                                 pme->mCameraHandle,
                                 pme);
-                        pthread_mutex_unlock(&pme->m_parm_lock);
                         rc = pme->mParameters.getRelatedCamCalibration(
                             &(pme->mJpegMetadata.otp_calibration_data));
                         CDBG("%s: Dumping Calibration Data Version Id %f rc %d",
@@ -9160,6 +9161,7 @@ void *QCamera2HardwareInterface::deferredWorkRoutine(void *obj)
                                 pme->mJpegMetadata.otp_calibration_data.calibration_format_version,
                                 rc);
                         if (rc != 0) {
+                            pthread_mutex_unlock(&pme->m_parm_lock);
                             ALOGE("getRelatedCamCalibration failed");
                             pme->mCameraHandle->ops->close_camera(
                                 pme->mCameraHandle->camera_handle);
@@ -9173,6 +9175,7 @@ void *QCamera2HardwareInterface::deferredWorkRoutine(void *obj)
 
                         pme->mParameters.setMinPpMask(
                             cap->qcom_supported_feature_mask);
+                        pthread_mutex_unlock(&pme->m_parm_lock);
                         pme->mExifParams.debug_params =
                                 (mm_jpeg_debug_exif_params_t *)
                                 malloc(sizeof(mm_jpeg_debug_exif_params_t));

@@ -324,6 +324,14 @@ vendor/lib/libRSDriver_adreno.so
 vendor/lib/libchromatix_ov8865_ofilm_ffhy_20_hfr_90.so
 vendor/lib/libxtadapter.so
 vendor/lib/libqti-perfd-client.so
+vendor/lib/libqti-iop.so
+vendor/lib/libqti-utils.so
+vendor/lib/libqti-iop-client.so
+vendor/lib/libqti-util.so
+vendor/lib64/libqti-iop.so
+vendor/lib64/libqti-utils.so
+vendor/lib64/libqti-iop-client.so
+vendor/lib64/libqti-util.so
 vendor/lib/sensor_calibrate.so
 vendor/lib/libnative_audio_latency_jni.so
 vendor/lib/libjpegehw.so

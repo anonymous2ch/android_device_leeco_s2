@@ -44,7 +44,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := MSM8952
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -203,6 +203,7 @@ endif
 #RECOVERY_VARIANT := twrp
 ifeq ($(RECOVERY_VARIANT),twrp)
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp/fstab.qcom
+TARGET_RECOVERY_DEVICE_DIRS += device/leeco/s2/twrp
 BOARD_HAS_NO_REAL_SDCARD := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun0/file
 TW_THEME := portrait_hdpi
@@ -214,6 +215,44 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_NTFS_3G := true
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp,adb \
+    ro.product.locale=ru-RU \
+    persist.sys.timezone=Europe/Moscow \
+    ro.secure=0 \
+    ro.debug.secure=0 \
+    ro.adb.secure=0 \
+    ro.debuggable=1
+
+
+TW_INCLUDE_CRYPTO := true
+TW_THEME := portrait_hdpi
+TW_USE_TOOLBOX := false
+TW_EXCLUDE_SUPERSU := false
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+TW_HAS_NO_RECOVERY_PARTITION := false
+TW_HAS_NO_BOOT_PARTITION := false
+TW_NO_REBOOT_BOOTLOADER := false
+TW_NO_REBOOT_RECOVERY := false
+TW_NO_BATT_PERCENT := false
+TW_NO_CPU_TEMP := false
+TW_NEVER_UNMOUNT_SYSTEM := false
+TW_NO_USB_STORAGE := false
+TW_INCLUDE_INJECTTWRP := false
+TW_INCLUDE_BLOBPACK := false
+TW_HAS_DOWNLOAD_MODE := true
+TW_SDEXT_NO_EXT4 := false
+TW_NO_EXFAT_FUSE := false
+TW_DEFAULT_LANGUAGE := ru
+TW_NO_EXFAT := false
+TW_EXCLUDE_ENCRYPTED_BACKUPS := false
+TW_EXCLUDE_DEFAULT_USB_INIT := false
+TW_OEM_BUILD := false
+TW_INCLUDE_FB2PNG := true
+TWRP_INCLUDE_LOGCAT := true
+TARGET_RECOVERY_DEVICE_MODULES := libf2fs libf2fs_sparseblock libncurses libnl libssh libsysutils unrar 7z bash crypto fsck_msdos htop  logd logwrapper mkfs.f2fs mkfs.exfat mount.exfat mount.ntfs nano tzdatacheck uncrypt libnl libcutils libsparse logcat logd logwrapper
+
 #TWRP_EVENT_LOGGING := true
 else
 USE_CLANG_PLATFORM_BUILD := true
@@ -230,6 +269,7 @@ include device/qcom/sepolicy/sepolicy.mk
 
 # OTA Assert
 TARGET_OTA_ASSERT_DEVICE := s2,le_s2,le_s2_ww
-
 # inherit from the proprietary version
+
+
 -include vendor/leeco/s2/BoardConfigVendor.mk

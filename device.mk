@@ -87,6 +87,7 @@ PRODUCT_PACKAGES += \
     libtinyxml \
     tinymix
 
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.primary.msm8952 \
@@ -339,11 +340,15 @@ PRODUCT_CHARACTERISTICS := nosdcard
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=mtp,adb \
+    ro.product.locale=ru-RU \
+    persist.sys.timezone=Europe/Moscow \
+    ro.config.ringtone=RR.mp3 
+
 
 ifeq ($(TARGET_BUILD_VARIANT),eng)
 # Disable ADB authentication
-ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
 endif
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
@@ -351,3 +356,23 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 # Model is set via init library
 PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.model
+
+PRODUCT_PACKAGES += \
+    parted \
+    SnapdragonCamera2
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/ringtones/Boxbeat.ogg:system/media/audio/ringtones/Boxbeat.ogg \
+    $(LOCAL_PATH)/ringtones/CyanTone.ogg:system/media/audio/ringtones/CyanTone.ogg \
+    $(LOCAL_PATH)/ringtones/Highscore.ogg:system/media/audio/ringtones/Highscore.ogg \
+    $(LOCAL_PATH)/ringtones/Lyon.ogg:system/media/audio/ringtones/Lyon.ogg \
+    $(LOCAL_PATH)/ringtones/Resurrection.mp3:system/media/audio/ringtones/Resurrection.mp3 \
+    $(LOCAL_PATH)/ringtones/Resurrection_Ringtone2.mp3:system/media/audio/ringtones/Resurrection_Ringtone2.mp3 \
+    $(LOCAL_PATH)/ringtones/Rockin.ogg:system/media/audio/ringtones/Rockin.ogg \
+    $(LOCAL_PATH)/ringtones/RR.mp3:system/media/audio/ringtones/RR.mp3 \
+    $(LOCAL_PATH)/ringtones/Sheep.mp3:system/media/audio/ringtones/Sheep.mp3 \
+    $(LOCAL_PATH)/ringtones/Yukaay.ogg:system/media/audio/ringtones/Yukaay.ogg \
+    $(LOCAL_PATH)/app/AdAway.apk:system/app/AdAway/AdAway.apk \
+    $(LOCAL_PATH)/app/FDroid.apk:system/app/FDroid/FDroid.apk
+
+     
